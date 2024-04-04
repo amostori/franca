@@ -9,10 +9,25 @@ class WordsList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final hiveFunctions = ref.watch(hiveProvider);
+    final delay = ref.watch(delayProvider);
     final listOfWords = hiveFunctions.getWordList();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lista słówek'),
+        title: Text('Opóźnienie $delay s'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              ref.read(delayProvider.notifier).state++;
+            },
+            icon: const Icon(Icons.add),
+          ),
+          IconButton(
+            onPressed: () {
+              ref.read(delayProvider.notifier).state--;
+            },
+            icon: const Icon(Icons.remove),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

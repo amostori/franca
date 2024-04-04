@@ -10,7 +10,7 @@ class Word extends StateNotifier<WordModel> {
   Word({required this.delay, required this.hiveFunctions})
       : super(WordModel(
             frenchWord: '',
-            polishWord: 'polishWord'
+            polishWord: 'Naciśnij przycisk na dole ekranu.'
                 ''));
   final int delay;
   final HiveFunctions hiveFunctions;
@@ -40,13 +40,13 @@ class Word extends StateNotifier<WordModel> {
       final random = Random().nextInt(wordList.length);
       return wordList[random];
     } else {
-      return WordModel(frenchWord: 'empty french', polishWord: 'empty polish');
+      return WordModel(frenchWord: '', polishWord: 'Brak słówek');
     }
   }
 }
 
-final delayProvider = Provider<int>((ref) {
-  return 2;
+final delayProvider = StateProvider<int>((ref) {
+  return 5;
 });
 
 final wordProvider = StateNotifierProvider<Word, WordModel>((ref) {

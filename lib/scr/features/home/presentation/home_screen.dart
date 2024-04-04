@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:france_edukacy/scr/features/home/presentation/widgets/custom_paint.dart';
@@ -16,6 +18,13 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   final offsets = <Offset?>[];
+  late Timer _timer;
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +39,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             icon: const Icon(Icons.menu)),
         title: Text('$delay s'),
         actions: [
-          IconButton(
-              onPressed: () {
-                setState(() {
-                  offsets.clear();
-                });
-              },
-              icon: const Icon(Icons.remove)),
+          // IconButton(
+          //     onPressed: () {
+          //       setState(() {
+          //         offsets.clear();
+          //       });
+          //     },
+          //     icon: const Icon(Icons.cleaning_services)),
           IconButton(
               onPressed: () {
                 _showAlertDialog(context, ref);
@@ -52,6 +61,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           ref.read(wordProvider.notifier).showWord();
+          setState(() {
+            offsets.clear();
+          });
         },
         child: const Icon(Icons.navigate_next),
       ),
