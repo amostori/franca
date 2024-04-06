@@ -39,13 +39,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             icon: const Icon(Icons.menu)),
         title: Text('$delay s'),
         actions: [
-          // IconButton(
-          //     onPressed: () {
-          //       setState(() {
-          //         offsets.clear();
-          //       });
-          //     },
-          //     icon: const Icon(Icons.cleaning_services)),
+          IconButton(
+              onPressed: () {
+                setState(() {
+                  offsets.clear();
+                });
+              },
+              icon: const Icon(Icons.cleaning_services)),
           IconButton(
               onPressed: () {
                 _showAlertDialog(context, ref);

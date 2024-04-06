@@ -11,6 +11,7 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(WordModelAdapter());
   await Hive.openBox<WordModel>(Constants.wordBox);
+  await Hive.openBox<WordModel>(Constants.archiveWordBox);
 
   runApp(const ProviderScope(child: MyApp()));
 }

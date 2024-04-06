@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:france_edukacy/scr/features/home/database/hive_functions.dart';
 import 'package:france_edukacy/scr/features/home/provider/word_provider.dart';
+import 'package:france_edukacy/scr/utils/routing/routing.dart';
+import 'package:go_router/go_router.dart';
 
 class WordsList extends ConsumerWidget {
   const WordsList({super.key});
@@ -29,6 +31,12 @@ class WordsList extends ConsumerWidget {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.goNamed(AppRoute.archiveList.name);
+        },
+        child: const Icon(Icons.all_inclusive),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView.builder(
@@ -38,9 +46,11 @@ class WordsList extends ConsumerWidget {
                 listOfWords[index].frenchWord,
                 style: const TextStyle(fontSize: 24),
               ),
-              trailing: IconButton(
+              leading: IconButton(
                 onPressed: () {
-                  ref.read(wordProvider.notifier).removeOne(index);
+                  ref
+                      .read(wordProvider.notifier)
+                      .removeOne(index, listOfWords[index]);
                   Navigator.pop(context);
                 },
                 icon: const Icon(Icons.remove),

@@ -17,7 +17,6 @@ class Word extends StateNotifier<WordModel> {
 
   Future<void> showWord() async {
     final word = getQuestion();
-    print(word.frenchWord);
     state = state.copyWith(
         frenchWord: Constants.progressIndicator, polishWord: word.polishWord);
     await Future.delayed(Duration(seconds: delay));
@@ -29,10 +28,18 @@ class Word extends StateNotifier<WordModel> {
     showWord();
   }
 
-  Future<void> removeOne(int index) async {
+  Future<void> removeOne(int index, WordModel wordModel) async {
     await hiveFunctions.removeOne(index);
+    hiveFunctions.addWordToArchive(wordModel);
     showWord();
   }
+
+  Future<void> removeFromArchive(int index, WordModel wordModel) async {
+    await hiveFunctions.removeFromArchive(index);
+    showWord();
+  }
+
+  Future<void> addWordToArchive(WordModel wordModel) async {}
 
   WordModel getQuestion() {
     var wordList = hiveFunctions.getWordList();
