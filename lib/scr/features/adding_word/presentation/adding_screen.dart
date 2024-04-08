@@ -54,7 +54,9 @@ class AddingScreen extends ConsumerWidget {
                           frenchWord: frenchWordController.text);
                       hiveFunctions.addWordToDatabase(newWord);
                       ref.read(wordProvider.notifier).showWord();
-                      Navigator.pop(context);
+                      polishWordController.text = '';
+                      frenchWordController.text = '';
+                      // Navigator.pop(context);
                     }
                   },
                   child: const Text(

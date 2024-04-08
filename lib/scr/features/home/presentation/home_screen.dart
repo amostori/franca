@@ -32,13 +32,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final delay = ref.watch(delayProvider);
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              context.goNamed(AppRoute.wordList.name);
-            },
-            icon: const Icon(Icons.menu)),
-        title: Text('$delay s'),
+        title: Text('Czas: $delay s'),
         actions: [
+          IconButton(
+              onPressed: () {
+                context.goNamed(AppRoute.wordList.name);
+              },
+              icon: const Icon(Icons.list)),
           IconButton(
               onPressed: () {
                 setState(() {

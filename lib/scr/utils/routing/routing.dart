@@ -31,7 +31,7 @@ final routeByName = GoRouter(
         GoRoute(
           path: 'word_list',
           name: AppRoute.wordList.name,
-          builder: (context, state) => const WordsList(),
+          builder: (context, state) => const WordList(),
           routes: [
             GoRoute(
               path: 'archive_list',

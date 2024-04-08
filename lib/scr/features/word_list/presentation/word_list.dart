@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:france_edukacy/scr/features/home/database/hive_functions.dart';
-import 'package:france_edukacy/scr/features/home/provider/word_provider.dart';
-import 'package:france_edukacy/scr/utils/routing/routing.dart';
 import 'package:go_router/go_router.dart';
 
-class WordsList extends ConsumerWidget {
-  const WordsList({super.key});
+import '../../../utils/routing/routing.dart';
+import '../../home/database/hive_functions.dart';
+import '../../home/provider/word_provider.dart';
+
+class WordList extends ConsumerStatefulWidget {
+  const WordList({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState createState() => _WordListState();
+}
+
+class _WordListState extends ConsumerState<WordList> {
+  @override
+  Widget build(BuildContext context) {
     final hiveFunctions = ref.watch(hiveProvider);
     final delay = ref.watch(delayProvider);
     final listOfWords = hiveFunctions.getWordList();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Opóźnienie $delay s'),
+        title: Text('Czas: $delay s'),
         actions: [
           IconButton(
             onPressed: () {
@@ -25,7 +31,11 @@ class WordsList extends ConsumerWidget {
           ),
           IconButton(
             onPressed: () {
-              ref.read(delayProvider.notifier).state--;
+              if (delay > 1) {
+                ref.read(delayProvider.notifier).state--;
+              } else {
+                return;
+              }
             },
             icon: const Icon(Icons.remove),
           ),
@@ -46,12 +56,12 @@ class WordsList extends ConsumerWidget {
                 listOfWords[index].frenchWord,
                 style: const TextStyle(fontSize: 24),
               ),
-              leading: IconButton(
+              trailing: IconButton(
                 onPressed: () {
                   ref
                       .read(wordProvider.notifier)
                       .removeOne(index, listOfWords[index]);
-                  Navigator.pop(context);
+                  setState(() {});
                 },
                 icon: const Icon(Icons.remove),
               ),
