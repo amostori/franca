@@ -50,7 +50,6 @@ class HiveFunctions {
 
   Future<void> clearAll() async {
     await wordBox.clear();
-    // print('word.clear word = ${wordBox.values.first.frenchWord}');
   }
 
   Future<void> removeOne(int index) async {

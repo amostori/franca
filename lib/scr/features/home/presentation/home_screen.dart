@@ -46,11 +46,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 });
               },
               icon: const Icon(Icons.cleaning_services)),
-          IconButton(
-              onPressed: () {
-                _showAlertDialog(context, ref);
-              },
-              icon: const Icon(Icons.delete)),
+          // IconButton(
+          //     onPressed: () {
+          //       _showAlertDialog(context, ref);
+          //     },
+          //     icon: const Icon(Icons.delete)),
           IconButton(
               onPressed: () {
                 context.goNamed(AppRoute.adding.name);

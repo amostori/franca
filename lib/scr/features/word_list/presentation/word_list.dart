@@ -56,7 +56,7 @@ class _WordListState extends ConsumerState<WordList> {
                 listOfWords[index].frenchWord,
                 style: const TextStyle(fontSize: 24),
               ),
-              trailing: IconButton(
+              leading: IconButton(
                 onPressed: () {
                   ref
                       .read(wordProvider.notifier)

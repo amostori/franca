@@ -33,6 +33,7 @@ class _ArchiveListPageState extends ConsumerState<ArchiveListPage> {
                 onPressed: () {
                   hiveFunctions.addWordToDatabase(listOfWords[index]);
                   setState(() {});
+                  showInfoAboutAddingWord(listOfWords[index].frenchWord);
 
                   // Navigator.pop(context);
                 },
@@ -55,5 +56,11 @@ class _ArchiveListPageState extends ConsumerState<ArchiveListPage> {
         ),
       ),
     );
+  }
+
+  void showInfoAboutAddingWord(String word) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Dodano słowo $word do '
+            'nauki')));
   }
 }
