@@ -28,15 +28,15 @@ class Word extends StateNotifier<WordModel> {
     showWord();
   }
 
-  Future<void> removeOne(int index, WordModel wordModel) async {
-    await hiveFunctions.removeOne(index);
+  Future<void> removeOne(WordModel wordModel) async {
+    await hiveFunctions.removeOne(wordModel);
     hiveFunctions.addWordToArchive(wordModel);
     showWord();
   }
 
-  Future<void> removeFromArchive(int index, WordModel wordModel) async {
-    await hiveFunctions.removeFromArchive(index);
-    showWord();
+  Future<void> removeFromArchive(WordModel wordModel) async {
+    await hiveFunctions.removeFromArchive(wordModel);
+    // showWord();
   }
 
   Future<void> addWordToArchive(WordModel wordModel) async {}

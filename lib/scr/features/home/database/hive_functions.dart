@@ -37,27 +37,35 @@ class HiveFunctions {
   }
 
   void addWordToDatabase(WordModel word) {
-    WordModel newWord =
-        WordModel(polishWord: word.polishWord, frenchWord: word.frenchWord);
-    wordBox.add(newWord);
+    // WordModel newWord =
+    //     WordModel(polishWord: word.polishWord, frenchWord: word.frenchWord);
+    // wordBox.add(word);
+    wordBox.put(word.frenchWord, word);
   }
 
   void addWordToArchive(WordModel word) {
-    WordModel newWord =
-        WordModel(polishWord: word.polishWord, frenchWord: word.frenchWord);
-    archiveWordBox.add(newWord);
+    // for (var i in archiveWordBox.values) {
+    //   print('${i.frenchWord}  ${word.frenchWord}literacja');
+    //   if (i.frenchWord.contains(word.frenchWord)) {
+    //     print('i.frenchWord.contains(word.frenchWord) is true');
+    //   } else {
+    //     print('i.frenchWord.contains(word.frenchWord) is false');
+    //     archiveWordBox.add(word);
+
+    archiveWordBox.put(word.frenchWord, word);
   }
 
   Future<void> clearAll() async {
     await wordBox.clear();
   }
 
-  Future<void> removeOne(int index) async {
-    await wordBox.deleteAt(index);
+  Future<void> removeOne(WordModel wordModel) async {
+    await wordBox.delete(wordModel.frenchWord);
   }
 
-  Future<void> removeFromArchive(int index) async {
-    await archiveWordBox.deleteAt(index);
+  Future<void> removeFromArchive(WordModel wordModel) async {
+    await archiveWordBox.delete(wordModel.frenchWord);
+    // await archiveWordBox.delete(key)
   }
 }
 

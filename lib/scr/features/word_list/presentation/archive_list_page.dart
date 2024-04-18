@@ -43,7 +43,7 @@ class _ArchiveListPageState extends ConsumerState<ArchiveListPage> {
                 onPressed: () {
                   ref
                       .read(wordProvider.notifier)
-                      .removeFromArchive(index, listOfWords[index]);
+                      .removeFromArchive(listOfWords[index]);
                   setState(() {});
 
                   // Navigator.pop(context);

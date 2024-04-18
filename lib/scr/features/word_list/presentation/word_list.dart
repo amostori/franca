@@ -58,9 +58,7 @@ class _WordListState extends ConsumerState<WordList> {
               ),
               leading: IconButton(
                 onPressed: () {
-                  ref
-                      .read(wordProvider.notifier)
-                      .removeOne(index, listOfWords[index]);
+                  ref.read(wordProvider.notifier).removeOne(listOfWords[index]);
                   setState(() {});
                 },
                 icon: const Icon(Icons.remove),
