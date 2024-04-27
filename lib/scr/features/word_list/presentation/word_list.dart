@@ -52,16 +52,13 @@ class _WordListState extends ConsumerState<WordList> {
         child: ListView.builder(
           itemBuilder: (context, index) {
             return ListTile(
+              onLongPress: () {
+                ref.read(wordProvider.notifier).removeOne(listOfWords[index]);
+                setState(() {});
+              },
               title: Text(
                 listOfWords[index].frenchWord,
                 style: const TextStyle(fontSize: 24),
-              ),
-              leading: IconButton(
-                onPressed: () {
-                  ref.read(wordProvider.notifier).removeOne(listOfWords[index]);
-                  setState(() {});
-                },
-                icon: const Icon(Icons.remove),
               ),
             );
           },
