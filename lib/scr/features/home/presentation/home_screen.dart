@@ -32,25 +32,33 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final delay = ref.watch(delayProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Czas: $delay s'),
+        title: GestureDetector(
+            onTap: () {
+              {
+                if (delay > 1) {
+                  ref.read(delayProvider.notifier).state--;
+                } else {
+                  return;
+                }
+              }
+            },
+            onLongPress: () {
+              ref.read(delayProvider.notifier).state++;
+            },
+            child: Text('Czas: $delay s')),
         actions: [
           IconButton(
               onPressed: () {
                 context.goNamed(AppRoute.wordList.name);
               },
               icon: const Icon(Icons.list)),
-          IconButton(
-              onPressed: () {
-                setState(() {
-                  offsets.clear();
-                });
-              },
-              icon: const Icon(Icons.cleaning_services)),
           // IconButton(
           //     onPressed: () {
-          //       _showAlertDialog(context, ref);
+          //       setState(() {
+          //         offsets.clear();
+          //       });
           //     },
-          //     icon: const Icon(Icons.delete)),
+          //     icon: const Icon(Icons.cleaning_services)),
           IconButton(
               onPressed: () {
                 context.goNamed(AppRoute.adding.name);
@@ -93,6 +101,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         child: Text(
                           word.frenchWord,
                           textAlign: TextAlign.center,
+                          overflow: TextOverflow.visible,
                         )),
               ],
             ),
@@ -122,9 +131,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               },
               child: CustomPaint(
                 painter: MyPainter(offsets: offsets),
-                child: const SizedBox(
+                child: Container(
+                  alignment: Alignment.topRight,
                   width: double.infinity,
                   height: double.infinity,
+                  child: IconButton(
+                    icon: const Icon(Icons.clear),
+                    onPressed: () {
+                      setState(() {
+                        offsets.clear();
+                      });
+                    },
+                  ),
                 ),
               ),
             ),
